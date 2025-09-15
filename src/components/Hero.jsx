@@ -19,7 +19,14 @@ export default function Hero() {
       >
         A passionate developer crafting modern, responsive, and high-performance web applications.
       </motion.p>
-      <div className="flex gap-4">
+
+      {/* --- Suggested Enhancement --- */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 1, duration: 0.5 }}
+        className="flex gap-4"
+      >
         <a
           href="#projects"
           className="px-6 py-3 bg-white text-purple-600 rounded-lg shadow hover:scale-105 transition"
@@ -32,7 +39,7 @@ export default function Hero() {
         >
           Contact Me
         </a>
-      </div>
+      </motion.div>
     </section>
   );
 }

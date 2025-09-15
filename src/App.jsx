@@ -1,4 +1,28 @@
 export default function App() {
+  const projects = [
+    {
+      title: "Vi-Life Diagnostics",
+      desc: "A full-stack diagnostic lab website built with Next.js, Express, and Supabase.",
+      imageUrl: "/vilife-image.jpg", // Assumes image is in the /public folder
+      liveUrl: "https://vi-life-diagnostics.vercel.app/",
+      repoUrl: "https://github.com/arjav007/vi-life-diagnostics",
+    },
+    {
+      title: "Patni Automobiles Website",
+      desc: "A responsive business website built with HTML, CSS, JS, and AWS integration.",
+      imageUrl: "/patni-auto-image.jpg", // Assumes image is in the /public folder
+      liveUrl: "https://patniautomobiles.com",
+      repoUrl: "#",
+    },
+    {
+      title: "Deep Learning Signature Auth",
+      desc: "A research project on Siamese CNNs for secure signature authentication.",
+      imageUrl: "/signature-auth-image.jpg", // Assumes image is in the /public folder
+      liveUrl: "#",
+      repoUrl: "#",
+    },
+  ];
+
   return (
     <div className="bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 text-white min-h-screen">
       {/* ================= Hero Section ================= */}
@@ -65,35 +89,38 @@ export default function App() {
       <section id="projects" className="py-20 bg-white text-gray-900 px-6 md:px-16 text-center">
         <h2 className="text-4xl font-bold mb-10">Projects</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {[
-            {
-              title: "Patni Automobiles Website",
-              desc: "A responsive business website built with HTML, CSS, JS, and AWS integration.",
-              link: "#",
-            },
-            {
-              title: "Deep Learning Signature Auth",
-              desc: "A research project on Siamese CNNs for secure signature authentication.",
-              link: "#",
-            },
-            {
-              title: "Park My Car",
-              desc: "A smart parking solution built for a techno-entrepreneurship project.",
-              link: "#",
-            },
-          ].map((project, index) => (
+          {projects.map((project, index) => (
             <div
               key={index}
-              className="bg-gray-50 p-6 rounded-lg shadow hover:shadow-2xl transition text-left"
+              className="bg-gray-50 rounded-lg shadow hover:shadow-2xl transition flex flex-col text-left overflow-hidden"
             >
-              <h3 className="text-2xl font-semibold mb-2">{project.title}</h3>
-              <p className="mb-4 text-gray-700">{project.desc}</p>
-              <a
-                href={project.link}
-                className="inline-block px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition"
-              >
-                View Project
-              </a>
+              {/* Project Image */}
+              <img src={project.imageUrl} alt={`${project.title} screenshot`} className="w-full h-48 object-cover" />
+
+              <div className="p-6 flex flex-col flex-grow">
+                <h3 className="text-2xl font-semibold mb-2">{project.title}</h3>
+                <p className="mb-4 text-gray-700 flex-grow">{project.desc}</p>
+                
+                {/* Project Links */}
+                <div className="flex gap-4 mt-auto">
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 text-center px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition"
+                  >
+                    Live Demo
+                  </a>
+                  <a
+                    href={project.repoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 text-center px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-900 transition"
+                  >
+                    View Code
+                  </a>
+                </div>
+              </div>
             </div>
           ))}
         </div>
