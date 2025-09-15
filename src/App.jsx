@@ -1,3 +1,4 @@
+import { useState } from 'react';
 export default function App() {
   const projects = [
     {
@@ -22,6 +23,46 @@ export default function App() {
     repoUrl: "#", // Update with the GitHub link when ready
     },
   ];
+
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: '',
+  });
+
+  const [formStatus, setFormStatus] = useState('');
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setFormStatus('Sending...');
+
+    try {
+      const response = await fetch('https://formspree.io/f/xovnzlvk', { // <-- PASTE YOUR URL HERE
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setFormStatus('Message sent successfully!');
+        setFormData({ name: '', email: '', message: '' }); // Clear the form
+      } else {
+        throw new Error('Failed to send message.');
+      }
+    } catch (error) {
+      console.error(error);
+      setFormStatus('An error occurred. Please try again.');
+    }
+  };
 
   return (
     <div className="bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 text-white min-h-screen">
@@ -126,26 +167,38 @@ export default function App() {
         </div>
       </section>
 
-      {/* ================= Contact Section ================= */}
-      <section id="contact" className="py-20 bg-gray-100 text-gray-900 px-6 md:px-16 text-center">
+       {/* ================= Contact Section ================= */}
+       <section id="contact" className="py-20 bg-gray-100 text-gray-900 px-6 md:px-16 text-center">
         <h2 className="text-4xl font-bold mb-6">Contact Me</h2>
         <p className="mb-8 text-lg">
           Have a project idea or want to collaborate? Let's connect!
         </p>
-        <form className="max-w-xl mx-auto space-y-4">
+        <form onSubmit={handleSubmit} className="max-w-xl mx-auto space-y-4">
           <input
             type="text"
+            name="name"
             placeholder="Your Name"
+            value={formData.name}
+            onChange={handleChange}
+            required
             className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500"
           />
           <input
             type="email"
+            name="email"
             placeholder="Your Email"
+            value={formData.email}
+            onChange={handleChange}
+            required
             className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500"
           />
           <textarea
+            name="message"
             placeholder="Your Message"
             rows="4"
+            value={formData.message}
+            onChange={handleChange}
+            required
             className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500"
           ></textarea>
           <button
@@ -154,6 +207,7 @@ export default function App() {
           >
             Send Message
           </button>
+          {formStatus && <p className="mt-4 text-center">{formStatus}</p>}
         </form>
       </section>
 
