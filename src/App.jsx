@@ -3,7 +3,7 @@ export default function App() {
     {
       title: "Vi-Life Diagnostics",
       desc: "A full-stack diagnostic lab website built with Next.js, Express, and Supabase.",
-      imageUrl: "/vilife-image.jpg", // Assumes image is in the /public folder
+      imageUrl: "/vi-life-photo.png", // Assumes image is in the /public folder
       liveUrl: "https://vi-life-diagnostics.vercel.app/",
       repoUrl: "https://github.com/arjav007/vi-life-diagnostics",
     },
@@ -12,14 +12,14 @@ export default function App() {
       desc: "A responsive business website built with HTML, CSS, JS, and AWS integration.",
       imageUrl: "/patni-auto-image.jpg", // Assumes image is in the /public folder
       liveUrl: "https://patniautomobiles.com",
-      repoUrl: "#",
+      repoUrl: "https://github.com/arjav007/patni-automobiles",
     },
     {
-      title: "Deep Learning Signature Auth",
-      desc: "A research project on Siamese CNNs for secure signature authentication.",
-      imageUrl: "/signature-auth-image.jpg", // Assumes image is in the /public folder
-      liveUrl: "#",
-      repoUrl: "#",
+      title: "Park My Car",
+    desc: "A smart parking solution designed to help users find and book available parking spots in real-time, conceptualized for a techno-entrepreneurship project.",
+    imageUrl: "/park-my-car-image.jpg", // Add a screenshot for this project
+    liveUrl: "#", // Update if you deploy it
+    repoUrl: "#", // Update with the GitHub link when ready
     },
   ];
 
