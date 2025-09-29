@@ -18,9 +18,9 @@ export default function App() {
     {
       title: "Park My Car",
     desc: "A smart parking solution designed to help users find and book available parking spots in real-time, conceptualized for a techno-entrepreneurship project.",
-    imageUrl: "/park-my-car-image.jpg", // Add a screenshot for this project
-    liveUrl: "#", // Update if you deploy it
-    repoUrl: "#", // Update with the GitHub link when ready
+    imageUrl: "/park-my-car.jpg", // Add a screenshot for this project
+    liveUrl: "https://park-my-car.vercel.app/", 
+    repoUrl: "https://github.com/arjav007/park-my-car", // Update with the GitHub link when ready
     },
   ];
 
