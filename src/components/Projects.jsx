@@ -1,6 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import AnimatedSection from './AnimatedSection'; // Helper for scroll-reveal animations
+import StarsCanvas from './Stars.jsx'; // Import the starfield animation
+
 
 // --- Project Card Sub-component ---
 // Now includes 'metrics' and 'technologies' to showcase impact and skills.
@@ -90,7 +92,9 @@ export default function Projects() {
 
   return (
     <AnimatedSection className="py-24 bg-black/20" id="projects">
-      <div className="container mx-auto px-6">
+      {/* The starfield animation is placed here, in the background. */}
+      <StarsCanvas />
+      <div className="container mx-auto px-6 z-10">
         <h2 className="text-4xl font-bold text-center mb-12 text-white">Projects Spotlight</h2>
         <motion.div 
             className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
