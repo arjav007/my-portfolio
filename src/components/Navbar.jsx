@@ -2,22 +2,40 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 
-export default function Navbar() {
+export default function Navbar({ page, setPage }) {
   const [isOpen, setIsOpen] = useState(false);
   
-  // UPDATED: The navigation links now include all the new sections from your resume.
+  // The navigation links are now more descriptive
   const navLinks = [
-    { title: 'Home', id: 'hero' },
-    { title: 'About', id: 'about' },
-    { title: 'Skills', id: 'skills' },
-    { title: 'Projects', id: 'projects' },
-    { title: 'Contact', id: 'contact' },
+    { title: 'Home', type: 'page', id: 'hero' },
+    { title: 'About', type: 'page', id: 'about' },
+    { title: 'Skills', type: 'scroll', id: 'skills' },
+    { title: 'Projects', type: 'scroll', id: 'projects' },
+    { title: 'Contact', type: 'scroll', id: 'contact' },
   ];
 
-  // Smooth scroll function for a better user experience
-  const scrollToSection = (id) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-    setIsOpen(false); // Close mobile menu after clicking a link
+  // Updated navigation handler for both pages and scrolling
+  const handleNavClick = (link) => {
+    setIsOpen(false); // Close mobile menu on any click
+
+    // Handle page navigation
+    if (link.title === 'About') {
+        setPage('about');
+        return;
+    }
+    
+    // Handle scrolling links or returning to home
+    if (page !== 'home') {
+      // If we are on the 'about' page, switch to 'home' first
+      setPage('home');
+      // Then, wait briefly for the homepage to render before scrolling
+      setTimeout(() => {
+        document.getElementById(link.id)?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    } else {
+      // If we are already on the homepage, just scroll
+      document.getElementById(link.id)?.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
@@ -25,7 +43,7 @@ export default function Navbar() {
       <nav className="container mx-auto px-6 py-4 flex justify-between items-center">
         <motion.div 
           className="text-2xl font-bold text-white tracking-widest cursor-pointer"
-          onClick={() => scrollToSection('hero')}
+          onClick={() => handleNavClick(navLinks.find(l => l.title === 'Home'))}
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
@@ -33,12 +51,12 @@ export default function Navbar() {
           Arjav Patni
         </motion.div>
         
-        {/* Desktop Menu - Breakpoint changed to 'lg' for more space */}
+        {/* Desktop Menu */}
         <div className="hidden lg:flex space-x-6">
           {navLinks.map((link, i) => (
             <motion.button
               key={link.id}
-              onClick={() => scrollToSection(link.id)}
+              onClick={() => handleNavClick(link)}
               className="text-gray-300 hover:text-purple-400 transition-colors duration-300 text-base"
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -68,7 +86,7 @@ export default function Navbar() {
               {navLinks.map((link, i) => (
                   <motion.button 
                     key={link.id} 
-                    onClick={() => scrollToSection(link.id)} 
+                    onClick={() => handleNavClick(link)} 
                     className="text-gray-300 hover:text-purple-400 text-3xl"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: isOpen ? 1 : 0, y: isOpen ? 0 : 20 }}
@@ -82,4 +100,3 @@ export default function Navbar() {
     </header>
   );
 };
-

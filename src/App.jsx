@@ -1,34 +1,46 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-// --- 1. Import all of your components ---
-// This now includes the new sections based on your resume.
-import CustomCursor from './components/CustomCursor';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import About from './components/About';
-import Skills from './components/Skills';
-import Projects from './components/Projects';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
+// --- Page & Component Imports ---
+import CustomCursor from './components/CustomCursor.jsx';
+import Navbar from './components/Navbar.jsx';
+import Hero from './components/Hero.jsx';
+import About from './components/About.jsx';
+import Skills from './components/Skills.jsx';
+import Projects from './components/Projects.jsx';
+import Contact from './components/Contact.jsx';
+import Footer from './components/Footer.jsx';
+import AboutPage from './pages/AboutPage.jsx'; // Import the new page
 
 // ==========================================================================
-// Main App Component
-// This file assembles all the individual components into your complete portfolio.
+// Main App Component - Now with Page Navigation
+// This file uses state to conditionally render either the HomePage or AboutPage.
 // ==========================================================================
 export default function App() {
+  // State to manage which page is currently displayed ('home' or 'about')
+  const [page, setPage] = useState('home');
+
+  // A small helper component to group the homepage sections
+  const HomePage = () => (
+    <>
+      <Hero />
+      {/* We pass setPage to the About component so the "Read More" button can change the page */}
+      <About setPage={setPage} />
+      <Skills />
+      <Projects />
+      <Contact />
+    </>
+  );
+
   return (
     <div className="bg-[#050816] text-white font-sans selection:bg-purple-500 selection:text-white">
       {/* These components are always visible */}
       <CustomCursor />
-      <Navbar />
+      {/* Pass page state and setter to Navbar for navigation logic */}
+      <Navbar page={page} setPage={setPage} />
 
-      {/* The <main> tag holds all the scrollable sections of your page */}
       <main>
-        <Hero />
-        <About />
-        <Skills />
-        <Projects />
-        <Contact />
+        {/* Conditional rendering based on the 'page' state */}
+        {page === 'home' ? <HomePage /> : <AboutPage setPage={setPage} />}
       </main>
 
       {/* The Footer is rendered at the very bottom */}
