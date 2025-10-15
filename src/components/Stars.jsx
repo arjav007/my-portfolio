@@ -3,9 +3,8 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { Points, PointMaterial } from '@react-three/drei';
 import * as random from 'maath/random/dist/maath-random.esm';
 
-// This is the reusable 3D Starfield Background Component.
-// It creates the interactive, futuristic particle effect.
-function Starfield(props) {
+// This is the 3D Starfield Background Component
+function Stars(props) {
   const ref = useRef();
   const [sphere] = useState(() => random.inSphere(new Float32Array(5000), { radius: 1.2 }));
 
@@ -36,15 +35,20 @@ function Starfield(props) {
   );
 }
 
-// This is the exported component that wraps the 3D canvas.
-export default function StarsCanvas() {
+// --- Canvas Wrapper for the Stars ---
+// This is the component you will import into other files.
+const StarsCanvas = () => {
   return (
-    <div className="w-full h-auto fixed inset-0 z-[-1]">
+    // UPDATED: Removed z-[-1] to allow parent component to control layering.
+    <div className="w-full h-full absolute inset-0">
       <Canvas camera={{ position: [0, 0, 1] }}>
         <Suspense fallback={null}>
-          <Starfield />
+          <Stars />
         </Suspense>
       </Canvas>
     </div>
-  )
-}
+  );
+};
+
+export default StarsCanvas;
+

@@ -1,17 +1,20 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import StarsCanvas from './Stars.jsx'; // Import the new reusable component
+import StarsCanvas from './Stars'; // Ensure this path is correct
 
-// --- This is the main Hero Component ---
-// It now imports the 3D background instead of defining it internally.
+// --- Main Hero Component (Updated) ---
+// This version uses proper CSS positioning to layer the content over the 3D background.
 export default function Hero() {
   return (
-    <section id="hero" className="h-screen flex items-center justify-center text-center text-white relative overflow-hidden">
-      {/* The 3D background is now a self-contained component */}
+    // The main container is now a "relative" positioning context.
+    <section id="hero" className="relative w-full h-screen mx-auto">
+      
+      {/* The StarsCanvas is positioned to fill the background. */}
       <StarsCanvas />
       
-      {/* Your content, layered on top of the 3D background */}
-      <div className="z-10 px-4">
+      {/* The content container is positioned "absolutely" on top of the background.
+          The `z-10` class ensures it has a higher stacking order. */}
+      <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white z-10 px-4">
         <motion.h1
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -53,3 +56,4 @@ export default function Hero() {
     </section>
   );
 }
+
