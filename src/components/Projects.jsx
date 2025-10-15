@@ -91,10 +91,16 @@ export default function Projects() {
   ];
 
   return (
-    <AnimatedSection className="py-24 bg-black/20" id="projects">
-      {/* The starfield animation is placed here, in the background. */}
-      <StarsCanvas />
-      <div className="container mx-auto px-6 z-10">
+    // CHANGE 1: Added `relative` to establish a positioning context for the background.
+    <AnimatedSection className="relative py-24 bg-black/20" id="projects">
+
+      {/* CHANGE 2: Wrapped StarsCanvas in a div with absolute positioning to make it a background layer. */}
+      <div className="absolute top-0 left-0 w-full h-full z-0">
+        <StarsCanvas />
+      </div>
+
+      {/* The container is now explicitly positioned to ensure it sits on top of the stars. */}
+      <div className="container mx-auto px-6 relative z-10">
         <h2 className="text-4xl font-bold text-center mb-12 text-white">Projects Spotlight</h2>
         <motion.div 
             className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
@@ -109,4 +115,3 @@ export default function Projects() {
     </AnimatedSection>
   );
 };
-
