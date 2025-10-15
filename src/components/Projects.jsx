@@ -69,18 +69,18 @@ export default function Projects() {
       technologies: ["Next.js", "Express.js", "PostgreSQL", "JWT"]
     },
     {
-      title: "Signature Auth (Deep Learning)",
+      title: "Patni Automobiles",
       desc: "A responsive business website built with HTML, CSS, JS, and integrated with AWS for hosting.",
-      imageUrl: "/park-my-car.jpg", // Replace with a relevant project image
+      imageUrl: "/patni-auto-image.jpg", // Replace with a relevant project image
       liveUrl: "https://patniautomobiles.com/", // Add live link if available
       repoUrl: "https://github.com/arjav007/patni-automobiles",
       metrics: ["Increased Production tyres sale by 25%"],
       technologies: ["HTML", "CSS", "JS","AWS"]
     },
     {
-      title: "T20 World Cup Dashboard",
+      title: "Park My Car",
       desc: "A smart parking solution to find and book spots in real-time, conceptualized for a techno-entrepreneurship project.",
-      imageUrl: "/patni-auto-image.jpg", // Replace with a relevant project image
+      imageUrl: "/park-my-car.jpg", // Replace with a relevant project image
       liveUrl: "https://park-my-car.vercel.app/", // Add live link if available
       repoUrl: "https://github.com/arjav007/park-my-car", // Update with correct repo if different
       metrics: ["📊 40% Improvement in data insights", "⏱️ 50% Reduction in manual reporting time"],

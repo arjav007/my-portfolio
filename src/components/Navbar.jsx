@@ -11,9 +11,6 @@ export default function Navbar() {
     { title: 'About', id: 'about' },
     { title: 'Skills', id: 'skills' },
     { title: 'Projects', id: 'projects' },
-    { title: 'Experience', id: 'experience' },
-    { title: 'Education', id: 'education' },
-    { title: 'Achievements', id: 'achievements' },
     { title: 'Contact', id: 'contact' },
   ];
 
