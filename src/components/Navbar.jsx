@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import StarsCanvas from './Stars.jsx'; // 1. Import the StarsCanvas component
 
 export default function Navbar({ page, setPage }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -39,8 +40,16 @@ export default function Navbar({ page, setPage }) {
   };
 
   return (
-    <header className="fixed top-0 left-0 w-full bg-black/30 backdrop-blur-md z-40">
-      <nav className="container mx-auto px-6 py-4 flex justify-between items-center">
+    // 2. Make the header `relative` and `overflow-hidden`
+    <header className="fixed top-0 left-0 w-full bg-black/30 backdrop-blur-md z-40 overflow-hidden">
+      
+      {/* 3. Add the StarsCanvas as the background layer */}
+      <div className="absolute inset-0 z-0">
+        <StarsCanvas />
+      </div>
+      
+      {/* 4. Ensure the navigation content is on a higher layer */}
+      <nav className="container mx-auto px-6 py-4 flex justify-between items-center relative z-10">
         <motion.div 
           className="text-2xl font-bold text-white tracking-widest cursor-pointer"
           onClick={() => handleNavClick(navLinks.find(l => l.title === 'Home'))}
@@ -75,7 +84,7 @@ export default function Navbar({ page, setPage }) {
         </div>
       </nav>
       
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Menu Overlay - no changes needed, it will cover the stars correctly */}
       <motion.div
           className={`absolute top-0 left-0 w-full h-screen bg-black/95 lg:hidden flex flex-col items-center justify-center`}
           initial={{ opacity: 0, x: "100%" }}
