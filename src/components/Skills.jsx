@@ -25,7 +25,7 @@ const SkillIcon = ({ name }) => (
 // --- Main Skills Section ---
 export default function Skills() {
   // Your specific skill set is used here.
-  const userSkills = ["HTML5", "CSS3", "JavaScript", "React", "Tailwind CSS", "Node.js", "Python", "AWS"];
+  const userSkills = ["HTML5", "CSS3", "JavaScript", "React", "Tailwind CSS", "Node.js", "Python", "AWS","PostgreSQL"];
 
   return (
     <AnimatedSection className="py-24" id="skills">

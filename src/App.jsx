@@ -1,25 +1,27 @@
 import React from 'react';
 
-// --- 1. Import all your new components ---
-// This assumes all component files are in a 'src/components/' directory.
+// --- 1. Import all of your components ---
+// This now includes the new sections based on your resume.
 import CustomCursor from './components/CustomCursor';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
 import Skills from './components/Skills';
 import Projects from './components/Projects';
+import Experience from './components/Experience'; // New
+import Education from './components/Education';   // New
+import Achievements from './components/Achievements'; // New
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 
 // ==========================================================================
 // Main App Component
-// This is now the central hub of your portfolio. It assembles all the
-// individual pieces into a complete webpage.
+// This file assembles all the individual components into your complete portfolio.
 // ==========================================================================
 export default function App() {
   return (
     <div className="bg-[#050816] text-white font-sans selection:bg-purple-500 selection:text-white">
-      {/* These components are rendered on every page */}
+      {/* These components are always visible */}
       <CustomCursor />
       <Navbar />
 
@@ -29,6 +31,9 @@ export default function App() {
         <About />
         <Skills />
         <Projects />
+        <Experience />
+        <Education />
+        <Achievements />
         <Contact />
       </main>
 
