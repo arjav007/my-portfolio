@@ -9,7 +9,7 @@ export default function Footer() {
     <footer className="relative overflow-hidden py-8 text-center text-gray-500 bg-black/20">
       
       {/* 3. Add the StarsCanvas as the background layer */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 h-full">
         <StarsCanvas />
       </div>
 

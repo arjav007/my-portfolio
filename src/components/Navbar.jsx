@@ -44,7 +44,7 @@ export default function Navbar({ page, setPage }) {
     <header className="fixed top-0 left-0 w-full bg-black/30 backdrop-blur-md z-40 overflow-hidden">
       
       {/* 3. Add the StarsCanvas as the background layer */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 h-full">
         <StarsCanvas />
       </div>
       
