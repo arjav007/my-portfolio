@@ -15,7 +15,7 @@ export default function Navbar({ page, setPage }) {
   ];
 
   const handleNavClick = (link) => {
-    setIsOpen(false); // Close mobile menu on any click
+    setIsOpen(false); 
 
     if (link.title === 'About') {
         setPage('about');
@@ -33,7 +33,8 @@ export default function Navbar({ page, setPage }) {
   };
 
   return (
-    <header className="fixed top-0 left-0 w-full bg-black/30 backdrop-blur-md z-40 overflow-hidden">
+    // --- CHANGE IS HERE: z-40 is changed to z-50 ---
+    <header className="fixed top-0 left-0 w-full bg-black/30 backdrop-blur-md z-50 overflow-hidden">
       
       <div className="absolute inset-0 z-0 h-full">
         <StarsCanvas />
@@ -66,24 +67,19 @@ export default function Navbar({ page, setPage }) {
           ))}
         </div>
 
-        {/* Mobile Menu Button - No changes needed here */}
+        {/* Mobile Menu Button */}
         <div className="lg:hidden">
             <button onClick={() => setIsOpen(!isOpen)} className="text-white focus:outline-none z-50">
               {isOpen ? <XMarkIcon className="w-8 h-8" /> : <Bars3Icon className="w-8 h-8" />}
             </button>
         </div>
 
-        {/* --- CHANGES START HERE --- */}
-
-        {/* 1. The Mobile Menu Overlay has been moved INSIDE the <nav> element. */}
-        {/* This allows it to share the same positioning context as the button. */}
-        {/* 2. Added `z-40` to the overlay. This puts it above the nav content (logo, etc.) but below the mobile menu button (which has z-50). */}
+        {/* Mobile Menu Overlay */}
         <motion.div
             className={`absolute top-0 left-0 w-full h-screen bg-black/95 lg:hidden flex flex-col items-center justify-center z-40`}
             initial={{ opacity: 0, x: "100%" }}
             animate={{ opacity: isOpen ? 1 : 0, x: isOpen ? "0%" : "100%" }}
             transition={{ duration: 0.3, ease: 'easeInOut' }}
-            // Added for good practice: prevents interaction with the menu when it's closed
             style={{ pointerEvents: isOpen ? 'auto' : 'none' }}
         >
             <div className="flex flex-col items-center justify-center h-full space-y-6">
@@ -101,10 +97,8 @@ export default function Navbar({ page, setPage }) {
                 ))}
             </div>
         </motion.div>
-        {/* --- CHANGES END HERE --- */}
       </nav>
       
-      {/* The Mobile Menu Overlay was moved from here up into the <nav> tag. */}
     </header>
   );
 };
