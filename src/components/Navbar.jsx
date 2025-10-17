@@ -33,13 +33,14 @@ export default function Navbar({ page, setPage }) {
   };
 
   return (
-    // --- CHANGE IS HERE: z-40 is changed to z-50 ---
-    <header className="fixed top-0 left-0 w-full bg-black/30 backdrop-blur-md z-50 overflow-hidden">
+    // The main header remains the fixed container with a high z-index
+    <header className="fixed top-0 left-0 w-full bg-black/30 backdrop-blur-md z-50">
       
       <div className="absolute inset-0 z-0 h-full">
         <StarsCanvas />
       </div>
       
+      {/* This nav bar holds the visible elements like the logo and button */}
       <nav className="container mx-auto px-6 py-4 flex justify-between items-center relative z-10">
         <motion.div 
           className="text-2xl font-bold text-white tracking-widest cursor-pointer"
@@ -67,38 +68,45 @@ export default function Navbar({ page, setPage }) {
           ))}
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* --- CHANGE 1: The button now has `relative` and a higher `z-index` --- */}
+        {/* This lifts the button to the highest layer, ensuring it's always clickable. */}
         <div className="lg:hidden">
-            <button onClick={() => setIsOpen(!isOpen)} className="text-white focus:outline-none z-50">
+            <button onClick={() => setIsOpen(!isOpen)} className="text-white focus:outline-none relative z-50">
               {isOpen ? <XMarkIcon className="w-8 h-8" /> : <Bars3Icon className="w-8 h-8" />}
             </button>
         </div>
-
-        {/* Mobile Menu Overlay */}
-        <motion.div
-            className={`absolute top-0 left-0 w-full h-screen bg-black/95 lg:hidden flex flex-col items-center justify-center z-40`}
-            initial={{ opacity: 0, x: "100%" }}
-            animate={{ opacity: isOpen ? 1 : 0, x: isOpen ? "0%" : "100%" }}
-            transition={{ duration: 0.3, ease: 'easeInOut' }}
-            style={{ pointerEvents: isOpen ? 'auto' : 'none' }}
-        >
-            <div className="flex flex-col items-center justify-center h-full space-y-6">
-                {navLinks.map((link, i) => (
-                    <motion.button 
-                      key={link.id} 
-                      onClick={() => handleNavClick(link)} 
-                      className="text-gray-300 hover:text-purple-400 text-3xl"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: isOpen ? 1 : 0, y: isOpen ? 0 : 20 }}
-                      transition={{ delay: isOpen ? 0.2 + i * 0.05 : 0 }}
-                    >
-                        {link.title}
-                    </motion.button>
-                ))}
-            </div>
-        </motion.div>
       </nav>
       
+      {/* --- CHANGE 2: The mobile menu overlay is now OUTSIDE the <nav> tag --- */}
+      {/* This allows it to fill the whole screen instead of just the nav container. */}
+      <motion.div
+            // --- CHANGE 3: Switched to `fixed inset-0` to cover the viewport ---
+            // and gave it a `z-40`, which is lower than the button's `z-50`.
+            className={`fixed inset-0 bg-black/95 lg:hidden flex flex-col items-center justify-center z-40`}
+            initial={{ opacity: 0, x: "100%" }}
+            animate={{ 
+                opacity: isOpen ? 1 : 0, 
+                x: isOpen ? "0%" : "100%",
+                // --- CHANGE 4: Added pointerEvents to prevent interaction when hidden ---
+                pointerEvents: isOpen ? 'auto' : 'none'
+            }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+      >
+          <div className="flex flex-col items-center justify-center h-full space-y-6">
+              {navLinks.map((link, i) => (
+                  <motion.button 
+                    key={link.id} 
+                    onClick={() => handleNavClick(link)} 
+                    className="text-gray-300 hover:text-purple-400 text-3xl"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: isOpen ? 1 : 0, y: isOpen ? 0 : 20 }}
+                    transition={{ delay: isOpen ? 0.2 + i * 0.05 : 0 }}
+                  >
+                      {link.title}
+                  </motion.button>
+              ))}
+          </div>
+      </motion.div>
     </header>
   );
 };
